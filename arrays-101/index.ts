@@ -111,3 +111,104 @@ function sortedSquares(nums: number[]): number[] {
                 }
         }
 };
+
+function removeElement(nums: number[], val: number): number {
+ 
+    let solution = 0;
+    
+    for(let i: number = 0; i < nums.length-solution; i++)
+    {
+        if(nums[i] === val)
+        {
+            let temp: number = nums[nums.length-1-solution];
+            nums[nums.length-1-solution] = 51
+            nums[i] = temp;
+            solution++;
+            i--;
+        }    
+    }
+    return nums.length - solution;
+};
+
+function removeDuplicates(nums: number[]): number {
+    let index = 1;
+    let current = nums[0];
+    for (let i=1; i< nums.length; i++) {
+// [0, 0, 1, 1, 1]
+// i = 1
+// current = 0
+// nums[1] = 0
+// i = 2
+// current = 0
+// nums[2] = 1
+// nums[1] = nums[2] = 1
+// current = nums[2] = 1
+// index = 2 
+// no other new digit therefore we can return now and not care what is past index
+// [0, 1, 1, 1, 2]
+// nums[4] = 2
+// nums[2] = nums[4] = 2
+// current = nums[4] = 2
+// index = 3
+// [0, 1, 2, 1, 2]
+        if (nums[i] !== current) {
+            nums[index] = nums[i];
+            current = nums[i];
+            index++;
+        }
+    }
+    return index;
+
+};
+
+function checkIfExist(arr: number[]): boolean {
+    const myMap = new Map();
+    
+    for(let counter: number = 0; counter < arr.length; counter++)
+    {
+        if(myMap.has(2 * arr[counter]) || myMap.has(arr[counter] / 2))
+          {
+            return true;
+          }
+        myMap.set(arr[counter], counter)
+
+    }
+    return false;
+};
+
+function validMountainArray(arr: number[]): boolean 
+{
+  let maxHeight: number = 0;
+  let solution: boolean = false;
+
+  for(let counter: number = 0; counter < arr.length - 1; counter++)
+  {
+    if(maxHeight)
+      {
+        if(!(arr[counter] > arr[counter + 1]))
+          {
+            return false;
+          }
+      }
+    else
+      {
+        if(!(arr[counter] < arr[counter + 1]))
+         {
+          if(arr[counter] === arr[counter + 1])
+            {
+              return solution;
+            }
+          else if(counter === 0)
+            {
+              return solution;
+            }
+          else
+            {
+              maxHeight = arr[counter]
+              solution = true;
+            }
+         }
+      }
+  }
+  return solution;
+};
