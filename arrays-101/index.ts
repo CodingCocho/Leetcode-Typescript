@@ -212,3 +212,48 @@ function validMountainArray(arr: number[]): boolean
   }
   return solution;
 };
+
+function replaceElements(arr: number[]): number[] {
+    if(arr.length === 1)
+      {
+        arr[0] = -1;
+      }
+    else
+      {
+        for(let counter: number = 0; counter < arr.length - 1; counter++)
+          {
+            
+            let currentMax: number = arr[counter + 1];
+            for(let innerCounter: number = counter + 1; innerCounter < arr.length; innerCounter++)
+              {
+                if(arr[innerCounter] > currentMax)
+                  {
+                    currentMax = arr[innerCounter];
+                  }
+              }
+            arr[counter] = currentMax;
+          }
+        arr[arr.length-1] = -1;
+      }
+    return arr;
+  };
+
+/**
+ Do not return anything, modify nums in-place instead.
+ */
+ function moveZeroes(nums: number[]): void {
+    let index: number = 0;
+    for(let counter: number = 0; counter < nums.length; counter++)
+    {
+      
+      if(nums[counter] !== 0)
+        {
+          let temp: number = nums[counter];
+          nums[counter] = 0;
+          nums[index] = temp;
+          index++;
+        }
+    }
+   
+    
+  };
