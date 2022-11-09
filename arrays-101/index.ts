@@ -257,3 +257,108 @@ function replaceElements(arr: number[]): number[] {
    
     
   };
+
+  function sortArrayByParity(nums: number[]): number[] {
+    let index: number = 0;
+    for(let counter: number = 0; counter < nums.length; counter++)
+      {
+        if(nums[counter] % 2 === 0)
+          {
+            let temp: number = nums[counter];
+            nums[counter] = nums[index];
+            nums[index] = temp;
+            index++;
+          }
+      }
+    return nums;
+  };
+
+  function heightChecker(heights: number[]): number {
+    let solution: number = 0;
+    let original: number[] = [...heights];
+    let bubbleSortSwap: boolean = false;
+    if(heights.length === 1)
+    {
+      return 0;
+    }
+    do{
+      bubbleSortSwap = false;
+      for(let counter: number = 0; counter < heights.length-1; counter++)
+        {
+          if(heights[counter] > heights[counter+1])
+            {
+              let height: number = heights[counter];
+              heights[counter] = heights[counter+1];
+              heights[counter+1] = height;
+              bubbleSortSwap = true;
+            }
+        }
+    }while(bubbleSortSwap)
+    
+      for(let counter: number = 0; counter < heights.length; counter++)
+        {
+          if(original[counter] !== heights[counter])
+            {
+              solution++
+            }
+        }
+    return solution;
+  };
+
+  function thirdMax(nums: number[]): number {
+    if(nums.length === 1)
+      {
+        return nums[0];
+      }
+    
+    if(nums.length === 2)
+      {
+        if(nums[0] > nums[1])
+          {
+            return nums[0]
+          }
+        else
+          {
+            return nums[1]
+          }
+      }
+    
+    let maxNums: number[] = [];
+    
+  //   Apply a bubble sort algorithm
+    do
+      {
+        for(let counter: number = 0; counter < nums.length-1; counter++)
+          {
+            if(nums[counter] > nums[counter+1])
+              {
+                let temp: number = nums[counter];
+                nums[counter] = nums[counter+1]
+                nums[counter+1] = temp;
+              }
+          }
+        let aMaxNum = nums.pop();
+        if(!maxNums.includes(aMaxNum))
+          {
+            maxNums.push(aMaxNum);
+          }
+      }while(maxNums.length !== 3 && nums.length !== 0)
+        
+    if(maxNums.length !== 3)
+      {
+        return maxNums[0];
+      }
+    return maxNums[2];
+  };
+
+  function findDisappearedNumbers(nums: number[]): number[] {
+    let solution: number[] = [];
+    for(let counter: number = 0; counter < nums.length; counter++)
+      {
+        if(!nums.includes(counter+1))
+          {
+            solution.push(counter+1)
+          }
+      }
+    return solution;
+  };
