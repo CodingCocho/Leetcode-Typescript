@@ -230,67 +230,90 @@ function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): Li
  * }
  */
 
- function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null 
- {
-   let currentNode: ListNode | null = head;
-   let jumpNode: ListNode | null = head;
-   
-   let currentIndex: number = 0;
-   let length: number = 0;
-   
-   if(!head.next && n == 1)
-     {
-       return null;
-     }
-   
-   let jumps: number = 2;
-   let goalIndex: number = 0;
-   while(currentNode)
-     {
-       let jumpCounter: number = 0
-       while(jumpCounter !== jumps && jumpNode)
-         {
-           if(jumpNode)
-             {
-               jumpNode = jumpNode.next
-               length++;
-             }
-           jumpCounter++;
-         }
-       jumps+=2;
-       if(jumpNode)
-         {
-           goalIndex = length;
- 
-         }
-       if(!jumpNode)
-         {
-           goalIndex = length - n;
-         }
-       if(goalIndex === 0)
-       {
-           head = head.next;
-           return head;
-       }
-       if(currentIndex === goalIndex-1)
-         {
-           if(n === 1)
-             {
-               currentNode.next = null;
-             }
-           else
-             {
-               let replacementNode: ListNode | null = currentNode.next.next;
-               currentNode.next = replacementNode;
-             }
-           return head;
-         }
-       if(!jumpNode)
-       {
-         currentNode = currentNode.next;
-         currentIndex++;
-       }
-     }
-   
-   return null;
- };
+function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
+  let currentNode: ListNode | null = head;
+  let jumpNode: ListNode | null = head;
+
+  let currentIndex: number = 0;
+  let length: number = 0;
+
+  if (!head.next && n == 1) {
+    return null;
+  }
+
+  let jumps: number = 2;
+  let goalIndex: number = 0;
+  while (currentNode) {
+    let jumpCounter: number = 0
+    while (jumpCounter !== jumps && jumpNode) {
+      if (jumpNode) {
+        jumpNode = jumpNode.next
+        length++;
+      }
+      jumpCounter++;
+    }
+    jumps += 2;
+    if (jumpNode) {
+      goalIndex = length;
+
+    }
+    if (!jumpNode) {
+      goalIndex = length - n;
+    }
+    if (goalIndex === 0) {
+      head = head.next;
+      return head;
+    }
+    if (currentIndex === goalIndex - 1) {
+      if (n === 1) {
+        currentNode.next = null;
+      }
+      else {
+        let replacementNode: ListNode | null = currentNode.next.next;
+        currentNode.next = replacementNode;
+      }
+      return head;
+    }
+    if (!jumpNode) {
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+  }
+
+  return null;
+};
+
+/**
+* Definition for singly-linked list.
+* class ListNode {
+*     val: number
+*     next: ListNode | null
+*     constructor(val?: number, next?: ListNode | null) {
+*         this.val = (val===undefined ? 0 : val)
+*         this.next = (next===undefined ? null : next)
+*     }
+* }
+*/
+
+function reverseList(head: ListNode | null): ListNode | null {
+  let listOfNodes: ListNode[] = [];
+  if (!head) {
+    return null
+  }
+  if (!head.next) {
+    return head;
+  }
+  let currentNode: ListNode | null = head;
+  while (currentNode) {
+    listOfNodes.push(currentNode);
+    currentNode = currentNode.next;
+  }
+  head = listOfNodes.pop();
+  currentNode = head;
+  while (listOfNodes.length !== 0) {
+    currentNode.next = listOfNodes.pop();
+    currentNode = currentNode.next;
+  }
+  currentNode.next = null;
+  return head;
+};
