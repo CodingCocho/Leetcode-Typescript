@@ -317,3 +317,76 @@ function reverseList(head: ListNode | null): ListNode | null {
   currentNode.next = null;
   return head;
 };
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+ function removeElements(head: ListNode | null, val: number): ListNode | null 
+ {
+   // No head edge case
+   if(!head)
+   {
+     return null
+   }
+   
+   // Head only edge case
+   if(head.next === null)
+   {
+     // Check if head needs to be deleted
+     if(head.val === val)
+     {
+       return null;
+     }
+     else
+     {
+       return head;
+     }
+   }
+   
+   // Head is val edge case loop
+   while(head.val === val)
+   {
+     head = head.next;
+     if(!head)
+     {
+       return null;
+     }
+   }
+   
+   // Hold our starting traversing node
+   let traversingNode: ListNode | null = head;
+   
+   // Traverse the LinkedList to find the desired ListNode
+   while(traversingNode.next !== null)
+   {
+     // Check if the next value 
+     if(traversingNode.next.val === val)
+     {
+       // Hold the following node
+       let temporaryNode: ListNode | null = traversingNode.next.next;
+       // Set the new next node
+       traversingNode.next = temporaryNode;
+       // Check we removed the tail
+       if(temporaryNode === null)
+       {
+         return head;
+       }
+     }
+     // Traverse the linked list
+     else
+     {
+       traversingNode = traversingNode.next;
+     }
+   }
+   // Return the head
+   return head;
+ };
