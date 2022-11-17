@@ -390,3 +390,111 @@ function reverseList(head: ListNode | null): ListNode | null {
    // Return the head
    return head;
  };
+
+ /**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function oddEvenList(head: ListNode | null): ListNode | null {
+  // No head edge case
+  if(!head)
+  {
+    return null
+  }
+  // Only head edge case
+  if(!head.next)
+  {
+    return head;
+  }
+  // Hold the length of the even ListNode link
+  let lengthOfEvenLink: number = 1;
+  // Hold the pointer to the last odd ListNode
+  let oddPointer: ListNode = head;
+  // Hold the pointer the first even ListNode
+  let evenPointer: ListNode = head.next;
+  // Loop through the LinkedList
+  while(true)
+  {
+    
+    // Retrieve potentialNode
+    let lengthCounter: number = 0;
+    
+    // Hold the next odd ListNode
+    let nextOddPointer: ListNode | null = evenPointer;
+    
+    // Hold the last even ListNode
+    let lastEvenPointer: ListNode | null = oddPointer;
+    
+    // Traverse the even ListNode link
+    while(lengthCounter !== lengthOfEvenLink)
+    {
+      if(nextOddPointer.next === null)
+      {
+        return head;
+      }
+      lastEvenPointer = lastEvenPointer.next;
+      nextOddPointer = nextOddPointer.next;
+      lengthCounter++
+    }
+  
+    // Linking
+    lastEvenPointer.next = nextOddPointer.next;
+    oddPointer.next = nextOddPointer;
+    nextOddPointer.next = evenPointer;
+    oddPointer = nextOddPointer;
+    lengthOfEvenLink++;
+  }
+  
+};
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+ function oddEvenList(head: ListNode | null): ListNode | null {
+  if (!head || !head.next) {
+       return head;
+   }
+ 
+   let oddList = head;
+   let evenList = head.next;
+
+   let curOdd = oddList;
+   let curEven = evenList;
+ 
+ let curNode = head.next.next;
+   let isOdd = true;
+ 
+   while (curNode) {
+       if (isOdd) {
+           curOdd.next = curNode;
+           curOdd = curOdd.next;
+       } else {
+           curEven.next = curNode;
+           curEven = curEven.next;
+       }
+       curNode = curNode.next;
+       isOdd = !isOdd;
+   }
+   curEven.next = null;
+   curOdd.next = evenList;
+ 
+   return oddList;
+ 
+};
